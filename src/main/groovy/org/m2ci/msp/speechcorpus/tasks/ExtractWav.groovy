@@ -3,21 +3,25 @@ package org.m2ci.msp.speechcorpus.tasks
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.*
 
-import org.yaml.snakeyaml.*
+import org.yaml.snakeyaml.Yaml
 
 class ExtractWav extends DefaultTask {
 
+    @InputFile
+    File yamlFile = project.findProperty('yamlFile')
+
+    @InputFile
+    File flacFile = project.findProperty('flacFile')
+
     @OutputDirectory
-    def destDir = project.file("$project.buildDir/wav")
+    File destDir = project.file("$project.buildDir/wav")
 
     @TaskAction
-    def extract() {
-        def options = new DumperOptions()
-        options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
-        def yaml = new Yaml(options)
-        yaml.load(project.findProperty('yamlFile').newReader()).each { utterance ->
+    void extract() {
+        def yaml = new Yaml()
+        yaml.load(yamlFile.newReader()).each { utterance ->
             project.exec {
-                commandLine 'sox', project.findProperty('flacFile'), "$destDir/${utterance.prompt}.wav", 'trim', utterance.start, "=$utterance.end"
+                commandLine 'sox', flacFile, "$destDir/${utterance.prompt}.wav", 'trim', utterance.start, "=$utterance.end"
             }
         }
     }
