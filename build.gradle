@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.17'
+    testCompile group: 'org.testng', name: 'testng', version: '6.9.10'
 }
 
 gradlePlugin {
@@ -21,4 +22,8 @@ gradlePlugin {
             implementationClass = 'SpeechCorpusPlugin'
         }
     }
+}
+
+test {
+    useTestNG()
 }
