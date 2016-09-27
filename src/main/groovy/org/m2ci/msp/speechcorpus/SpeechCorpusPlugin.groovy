@@ -1,5 +1,9 @@
+package org.m2ci.msp.speechcorpus
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+
+import org.m2ci.msp.speechcorpus.tasks.*
 
 class SpeechCorpusPlugin implements Plugin<Project> {
     void apply(Project project) {

@@ -19,7 +19,7 @@ gradlePlugin {
     plugins {
         speechCorpusPlugin {
             id = 'org.m2ci.msp.speech-corpus'
-            implementationClass = 'SpeechCorpusPlugin'
+            implementationClass = 'org.m2ci.msp.speechcorpus.SpeechCorpusPlugin'
         }
     }
 }

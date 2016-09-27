@@ -1,3 +1,5 @@
+package org.m2ci.msp.speechcorpus
+
 import org.testng.annotations.Test
 
 import org.gradle.api.Project

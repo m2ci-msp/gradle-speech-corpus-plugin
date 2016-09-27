@@ -1,3 +1,5 @@
+package org.m2ci.msp.speechcorpus.tasks
+
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.*
 
