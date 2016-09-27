@@ -11,6 +11,8 @@ class SpeechCorpusPlugin implements Plugin<Project> {
 
         project.task('extractText', type: ExtractText)
 
+        project.task('extractTextGrid', type: ExtractTextGrid)
+
         project.task('extractLab', type: ExtractLab)
 
         project.task('extractWav', type: ExtractWav)
