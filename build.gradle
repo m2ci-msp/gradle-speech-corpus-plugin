@@ -1,0 +1,8 @@
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile gradleApi()
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.17'
+}
