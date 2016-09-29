@@ -30,4 +30,12 @@ class SpeechCorpusPluginFunctionalTest {
         def result = gradle.build()
         assert result.task(':help').outcome == SUCCESS
     }
+
+    @Test
+    void testExtractLab() {
+        def result = gradle.withArguments(':extractLab').build()
+        assert result.task(':extractLab').outcome == SUCCESS
+        result = gradle.withArguments(':extractLab').build()
+        assert result.task(':extractLab').outcome == UP_TO_DATE
+    }
 }
