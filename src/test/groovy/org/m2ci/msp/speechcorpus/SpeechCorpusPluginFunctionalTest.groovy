@@ -9,6 +9,7 @@ import static org.gradle.testkit.runner.TaskOutcome.*
 class SpeechCorpusPluginFunctionalTest {
 
     def projectDir
+    def buildScript
     def gradle
     def yamlFileName = 'foobarbaz.yaml'
     def flacFileName = 'foobarbaz.flac'
@@ -16,7 +17,7 @@ class SpeechCorpusPluginFunctionalTest {
     @BeforeMethod
     void setUp() {
         projectDir = File.createTempDir()
-        def buildScript = new File(projectDir, 'build.gradle')
+        buildScript = new File(projectDir, 'build.gradle')
         buildScript.text = """|plugins {
                               |  id 'org.m2ci.msp.speech-corpus'
                               |}
@@ -88,5 +89,27 @@ class SpeechCorpusPluginFunctionalTest {
             def expected = getClass().getResourceAsStream(wavFile).text
             assert actual == expected
         }
+    }
+
+    @Test
+    void testConcatenateToFlac() {
+        def wavDir = new File("$projectDir/wav")
+        wavDir.mkdirs()
+        ['foo.wav', 'bar.wav', 'baz.wav'].each { wavFile ->
+            new File(wavDir, wavFile).withOutputStream { stream ->
+                stream << getClass().getResourceAsStream(wavFile)
+            }
+        }
+        def flacFile = new File(projectDir, 'actual.flac')
+        buildScript << """|
+                          |task concatenateToFlac(type: org.m2ci.msp.speechcorpus.tasks.ConcatFlac) {
+                          |  srcDir = 'wav'
+                          |  destFile = '$flacFile.name'
+                          |}
+                          |""".stripMargin()
+        def result = gradle.withArguments(':concatenateToFlac').build()
+        assert result.task(':concatenateToFlac').outcome == SUCCESS
+        result = gradle.withArguments(':concatenateToFlac').build()
+        assert result.task(':concatenateToFlac').outcome == UP_TO_DATE
     }
 }
