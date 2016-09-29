@@ -37,11 +37,13 @@ class SpeechCorpusPluginTest {
     @Test
     void testTaskProps() {
         def task = project.tasks.findByName('extractWav')
-        assert task.yamlFile == project.speechCorpus.yamlFile
-        assert task.flacFile == project.speechCorpus.flacFile
-        task.yamlFile = project.file(yamlFileName)
-        task.flacFile = project.file(flacFileName)
-        assert task.yamlFile.name == yamlFileName
-        assert task.flacFile.name == flacFileName
+        project.afterEvaluate {
+            assert task.yamlFile == project.speechCorpus.yamlFile
+            assert task.flacFile == project.speechCorpus.flacFile
+            task.yamlFile = project.file(yamlFileName)
+            task.flacFile = project.file(flacFileName)
+            assert task.yamlFile.name == yamlFileName
+            assert task.flacFile.name == flacFileName
+        }
     }
 }

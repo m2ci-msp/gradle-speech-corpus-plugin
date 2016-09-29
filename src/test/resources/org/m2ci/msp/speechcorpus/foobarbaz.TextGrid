@@ -1,0 +1,74 @@
+"Praat chronological TextGrid text file"
+0 2.405   ! Time domain.
+3   ! Number of tiers.
+"IntervalTier" "prompts" 0 2.405
+"IntervalTier" "text" 0 2.405
+"IntervalTier" "segments" 0 2.405
+
+! prompts:
+1 0 0.8
+"foo"
+
+! text:
+2 0 0.8
+"foo"
+
+! segments:
+3 0 0.14
+"f"
+
+! segments:
+3 0.14 0.395
+"u"
+
+! segments:
+3 0.395 0.8
+"_"
+
+! prompts:
+1 0.8 1.585
+"bar"
+
+! text:
+2 0.8 1.585
+"bar"
+
+! segments:
+3 0.8 0.8600000000000001
+"b"
+
+! segments:
+3 0.8600000000000001 1.0150000000000001
+"A"
+
+! segments:
+3 1.0150000000000001 1.1800000000000002
+"r"
+
+! segments:
+3 1.1800000000000002 1.5850000000000002
+"_"
+
+! prompts:
+1 1.585 2.405
+"baz"
+
+! text:
+2 1.585 2.405
+"baz"
+
+! segments:
+3 1.585 1.645
+"b"
+
+! segments:
+3 1.645 1.845
+"{"
+
+! segments:
+3 1.845 2.0
+"z"
+
+! segments:
+3 2.0 2.4050000000000002
+"_"

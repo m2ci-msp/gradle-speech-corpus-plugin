@@ -8,10 +8,16 @@ import org.yaml.snakeyaml.Yaml
 class ExtractTextGrid extends DefaultTask {
 
     @InputFile
-    File yamlFile = project.speechCorpus.yamlFile
+    File yamlFile
 
     @OutputFile
     File destFile = project.file("$project.buildDir/${project.name}.TextGrid")
+
+    ExtractTextGrid() {
+        project.afterEvaluate {
+            yamlFile = yamlFile ?: project.speechCorpus.yamlFile
+        }
+    }
 
     @TaskAction
     void extract() {
@@ -30,7 +36,7 @@ class ExtractTextGrid extends DefaultTask {
                 writer.println '\n! prompts:'
                 writer.println "1 $utterance.start $utterance.end"
                 writer.println "\"$utterance.prompt\""
-                writer.println '\n! prompts:'
+                writer.println '\n! text:'
                 writer.println "2 $utterance.start $utterance.end"
                 writer.println "\"$utterance.text\""
                 if (utterance.segments) {
