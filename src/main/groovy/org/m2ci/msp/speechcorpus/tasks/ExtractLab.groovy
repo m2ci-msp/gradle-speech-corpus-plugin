@@ -8,10 +8,16 @@ import org.yaml.snakeyaml.Yaml
 class ExtractLab extends DefaultTask {
 
     @InputFile
-    File yamlFile = project.speechCorpus.yamlFile
+    File yamlFile
 
     @OutputDirectory
     File destDir = project.file("$project.buildDir/lab")
+
+    ExtractLab() {
+        project.afterEvaluate {
+            yamlFile = yamlFile ?: project.speechCorpus.yamlFile
+        }
+    }
 
     @TaskAction
     void extract() {
