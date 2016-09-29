@@ -44,7 +44,7 @@ class SpeechCorpusPluginFunctionalTest {
         assert result.task(':extractLab').outcome == UP_TO_DATE
         def actual = new File("$projectDir/build/lab/foo.lab").text
         def expected = getClass().getResourceAsStream('foo.lab').text
-        assert actual == expected
+        assert LabFile.parse(actual) == LabFile.parse(expected)
     }
 
     @Test
