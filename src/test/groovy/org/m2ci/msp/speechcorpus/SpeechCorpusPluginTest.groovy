@@ -7,6 +7,8 @@ import org.gradle.testfixtures.ProjectBuilder
 class SpeechCorpusPluginTest {
 
     def project
+    def yamlFileName = 'foobarbaz.yaml'
+    def flacFileName = 'foobarbaz.flac'
 
     @BeforeMethod
     void setUp() {
@@ -24,8 +26,6 @@ class SpeechCorpusPluginTest {
         assert project.extensions.findByName('speechCorpus')
         assert project.speechCorpus.yamlFile.name == "${project.name}.yaml"
         assert project.speechCorpus.yamlFile.name == "${project.name}.yaml"
-        def yamlFileName = 'foobarbaz.yaml'
-        def flacFileName = 'foobarbaz.flac'
         project.speechCorpus {
             yamlFile = yamlFileName
             flacFile = flacFileName
@@ -39,5 +39,9 @@ class SpeechCorpusPluginTest {
         def task = project.tasks.findByName('extractWav')
         assert task.yamlFile == project.speechCorpus.yamlFile
         assert task.flacFile == project.speechCorpus.flacFile
+        task.yamlFile = project.file(yamlFileName)
+        task.flacFile = project.file(flacFileName)
+        assert task.yamlFile.name == yamlFileName
+        assert task.flacFile.name == flacFileName
     }
 }
