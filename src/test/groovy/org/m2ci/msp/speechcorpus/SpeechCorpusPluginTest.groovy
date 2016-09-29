@@ -22,5 +22,15 @@ class SpeechCorpusPluginTest {
     @Test
     void testExtension() {
         assert project.extensions.findByName('speechCorpus')
+        assert project.speechCorpus.yamlFile == "${project.name}.yaml"
+        assert project.speechCorpus.yamlFile == "${project.name}.yaml"
+        def yamlFileName = 'foobarbaz.yaml'
+        def flacFileName = 'foobarbaz.flac'
+        project.speechCorpus {
+            yamlFile = yamlFileName
+            flacFile = flacFileName
+        }
+        assert project.speechCorpus.yamlFile == yamlFileName
+        assert project.speechCorpus.flacFile == flacFileName
     }
 }
