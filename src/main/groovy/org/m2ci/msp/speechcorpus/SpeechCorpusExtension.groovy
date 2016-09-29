@@ -1,8 +1,15 @@
 package org.m2ci.msp.speechcorpus
 
+import org.gradle.api.Project
+
 class SpeechCorpusExtension {
 
-    def yamlFile
+    def project
 
+    def yamlFile
     def flacFile
+
+    SpeechCorpusExtension(Project project) {
+        this.project = project
+    }
 }
