@@ -8,7 +8,7 @@ class SpeechCorpusPluginTest {
 
     def project
 
-    @BeforeTest
+    @BeforeMethod
     void setUp() {
         project = ProjectBuilder.builder().build()
         project.pluginManager.apply 'org.m2ci.msp.speech-corpus'
@@ -32,5 +32,12 @@ class SpeechCorpusPluginTest {
         }
         assert project.speechCorpus.yamlFile.name == yamlFileName
         assert project.speechCorpus.flacFile.name == flacFileName
+    }
+
+    @Test
+    void testTaskProps() {
+        def task = project.tasks.findByName('extractWav')
+        assert task.yamlFile == project.speechCorpus.yamlFile
+        assert task.flacFile == project.speechCorpus.flacFile
     }
 }

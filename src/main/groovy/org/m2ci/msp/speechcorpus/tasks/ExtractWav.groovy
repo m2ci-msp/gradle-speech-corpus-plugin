@@ -8,10 +8,10 @@ import org.yaml.snakeyaml.Yaml
 class ExtractWav extends DefaultTask {
 
     @InputFile
-    File yamlFile = project.findProperty('yamlFile')
+    File yamlFile = project.speechCorpus.yamlFile
 
     @InputFile
-    File flacFile = project.findProperty('flacFile')
+    File flacFile = project.speechCorpus.flacFile
 
     @OutputDirectory
     File destDir = project.file("$project.buildDir/wav")
