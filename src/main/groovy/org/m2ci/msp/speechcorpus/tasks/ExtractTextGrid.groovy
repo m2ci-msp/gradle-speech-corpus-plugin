@@ -36,7 +36,7 @@ class ExtractTextGrid extends DefaultTask {
                 writer.println '\n! prompts:'
                 writer.println "1 $utterance.start $utterance.end"
                 writer.println "\"$utterance.prompt\""
-                writer.println '\n! prompts:'
+                writer.println '\n! text:'
                 writer.println "2 $utterance.start $utterance.end"
                 writer.println "\"$utterance.text\""
                 if (utterance.segments) {
