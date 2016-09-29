@@ -68,5 +68,8 @@ class SpeechCorpusPluginFunctionalTest {
         assert result.task(':extractTextGrid').outcome == SUCCESS
         result = gradle.withArguments(':extractTextGrid').build()
         assert result.task(':extractTextGrid').outcome == UP_TO_DATE
+        def actual = new File("$projectDir/build/${projectDir.name}.TextGrid").text
+        def expected = getClass().getResourceAsStream('foobarbaz.TextGrid').text
+        assert actual == expected: projectDir
     }
 }
