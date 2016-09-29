@@ -35,7 +35,7 @@ class ConcatFlac extends DefaultTask {
             }
         }
         project.exec {
-            commandLine 'ffmpeg', '-f', 'concat', '-i', listFile, '-acodec', 'flac', '-compression_level', 12, destFile
+            commandLine 'ffmpeg', '-f', 'concat', '-safe', 0, '-i', listFile, '-acodec', 'flac', '-compression_level', 12, destFile
         }
     }
 }
