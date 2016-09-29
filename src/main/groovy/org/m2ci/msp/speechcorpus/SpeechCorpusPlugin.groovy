@@ -15,8 +15,6 @@ class SpeechCorpusPlugin implements Plugin<Project> {
             flacFile = project.file("${project.name}.flac")
         }
 
-        project.task('flac', type: Flac)
-
         project.task('extractText', type: ExtractText)
 
         project.task('extractTextGrid', type: ExtractTextGrid)
