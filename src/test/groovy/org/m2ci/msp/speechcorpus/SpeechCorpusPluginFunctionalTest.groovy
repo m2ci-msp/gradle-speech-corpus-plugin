@@ -107,9 +107,14 @@ class SpeechCorpusPluginFunctionalTest {
                           |  destFile = '$flacFile.name'
                           |}
                           |""".stripMargin()
-        def result = gradle.withArguments(':concatenateToFlac').build()
-        assert result.task(':concatenateToFlac').outcome == SUCCESS
-        result = gradle.withArguments(':concatenateToFlac').build()
-        assert result.task(':concatenateToFlac').outcome == UP_TO_DATE
+        // TODO travis does not provide compatible ffmpeg for its linux environments
+        if (System.getenv('TRAVIS')) {
+            gradle.withArguments(':concatenateToFlac').buildAndFail()
+        } else {
+            def result = gradle.withArguments(':concatenateToFlac').build()
+            assert result.task(':concatenateToFlac').outcome == SUCCESS
+            result = gradle.withArguments(':concatenateToFlac').build()
+            assert result.task(':concatenateToFlac').outcome == UP_TO_DATE
+        }
     }
 }
