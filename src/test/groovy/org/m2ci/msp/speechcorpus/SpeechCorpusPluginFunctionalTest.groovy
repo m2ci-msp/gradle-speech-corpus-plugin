@@ -83,5 +83,10 @@ class SpeechCorpusPluginFunctionalTest {
         assert result.task(':extractWav').outcome == SUCCESS
         result = gradle.withArguments(':extractWav').build()
         assert result.task(':extractWav').outcome == UP_TO_DATE
+        ['foo.wav', 'bar.wav', 'baz.wav'].each { wavFile ->
+            def actual = new File("$projectDir/build/wav/$wavFile").text
+            def expected = getClass().getResourceAsStream(wavFile).text
+            assert actual == expected
+        }
     }
 }
