@@ -55,6 +55,11 @@ class SpeechCorpusPluginFunctionalTest {
         assert result.task(':extractText').outcome == SUCCESS
         result = gradle.withArguments(':extractText').build()
         assert result.task(':extractText').outcome == UP_TO_DATE
+        ['foo.txt', 'bar.txt', 'baz.txt'].each { txtFile ->
+            def actual = new File("$projectDir/build/text/$txtFile").text
+            def expected = getClass().getResourceAsStream(txtFile).text
+            assert actual == expected
+        }
     }
 
     @Test
