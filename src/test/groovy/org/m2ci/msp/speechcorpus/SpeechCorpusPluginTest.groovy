@@ -18,4 +18,9 @@ class SpeechCorpusPluginTest {
     void canApplyPlugin() {
         assert project.pluginManager.hasPlugin('org.m2ci.msp.speech-corpus')
     }
+
+    @Test
+    void testExtension() {
+        assert project.extensions.findByName('speechCorpus')
+    }
 }

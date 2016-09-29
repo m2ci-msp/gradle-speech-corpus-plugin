@@ -9,6 +9,8 @@ class SpeechCorpusPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.pluginManager.apply BasePlugin
 
+        project.extensions.create 'speechCorpus', SpeechCorpusExtension
+
         project.task('flac', type: Flac)
 
         project.task('extractText', type: ExtractText)
