@@ -43,4 +43,20 @@ class SpeechCorpusPluginFunctionalTest {
         result = gradle.withArguments(':extractLab').build()
         assert result.task(':extractLab').outcome == UP_TO_DATE
     }
+
+    @Test
+    void testExtractText() {
+        def result = gradle.withArguments(':extractText').build()
+        assert result.task(':extractText').outcome == SUCCESS
+        result = gradle.withArguments(':extractText').build()
+        assert result.task(':extractText').outcome == UP_TO_DATE
+    }
+
+    @Test
+    void testExtractTextGrid() {
+        def result = gradle.withArguments(':extractTextGrid').build()
+        assert result.task(':extractTextGrid').outcome == SUCCESS
+        result = gradle.withArguments(':extractTextGrid').build()
+        assert result.task(':extractTextGrid').outcome == UP_TO_DATE
+    }
 }
