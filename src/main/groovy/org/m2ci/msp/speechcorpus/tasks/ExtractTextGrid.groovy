@@ -8,7 +8,7 @@ import org.yaml.snakeyaml.Yaml
 class ExtractTextGrid extends DefaultTask {
 
     @InputFile
-    File yamlFile = project.findProperty('yamlFile')
+    File yamlFile = project.speechCorpus.yamlFile
 
     @OutputFile
     File destFile = project.file("$project.buildDir/${project.name}.TextGrid")
