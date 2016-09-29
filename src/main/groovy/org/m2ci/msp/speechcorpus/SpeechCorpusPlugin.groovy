@@ -11,8 +11,8 @@ class SpeechCorpusPlugin implements Plugin<Project> {
 
         project.extensions.create 'speechCorpus', SpeechCorpusExtension, project
         project.speechCorpus {
-            yamlFile = "${project.name}.yaml"
-            flacFile = "${project.name}.flac"
+            yamlFile = project.file("${project.name}.yaml")
+            flacFile = project.file("${project.name}.flac")
         }
 
         project.task('flac', type: Flac)

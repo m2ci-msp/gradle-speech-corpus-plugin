@@ -4,12 +4,20 @@ import org.gradle.api.Project
 
 class SpeechCorpusExtension {
 
-    def project
+    Project project
 
-    def yamlFile
-    def flacFile
+    File yamlFile
+    File flacFile
 
     SpeechCorpusExtension(Project project) {
         this.project = project
+    }
+
+    void setYamlFile(String file) {
+        this.yamlFile = project.file(file)
+    }
+
+    void setFlacFile(String file) {
+        this.flacFile = project.file(file)
     }
 }
