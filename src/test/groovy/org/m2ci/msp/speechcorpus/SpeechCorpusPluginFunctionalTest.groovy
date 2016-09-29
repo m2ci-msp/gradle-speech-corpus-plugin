@@ -10,6 +10,7 @@ class SpeechCorpusPluginFunctionalTest {
 
     def projectDir
     def gradle
+    def yamlFileName = 'foobarbaz.yaml'
 
     @BeforeMethod
     void setUp() {
@@ -18,9 +19,12 @@ class SpeechCorpusPluginFunctionalTest {
         buildScript.text = """|plugins {
                               |  id 'org.m2ci.msp.speech-corpus'
                               |}
+                              |
+                              |speechCorpus {
+                              |  yamlFile = '$yamlFileName'
+                              |}
                               |""".stripMargin()
         gradle = GradleRunner.create().withPluginClasspath().withProjectDir(projectDir)
-        def yamlFileName = 'foobarbaz.yaml'
         new File(projectDir, yamlFileName).withOutputStream { stream ->
             stream << getClass().getResourceAsStream(yamlFileName)
         }
