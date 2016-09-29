@@ -20,6 +20,9 @@ class SpeechCorpusPluginFunctionalTest {
                               |}
                               |""".stripMargin()
         gradle = GradleRunner.create().withPluginClasspath().withProjectDir(projectDir)
+        new File(projectDir, "${projectDir.name}.yaml").withOutputStream { stream ->
+            stream << getClass().getResourceAsStream('foobarbaz.yaml')
+        }
     }
 
     @Test
