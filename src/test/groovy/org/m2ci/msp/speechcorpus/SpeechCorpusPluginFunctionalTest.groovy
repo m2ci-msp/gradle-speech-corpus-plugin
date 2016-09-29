@@ -11,6 +11,7 @@ class SpeechCorpusPluginFunctionalTest {
     def projectDir
     def gradle
     def yamlFileName = 'foobarbaz.yaml'
+    def flacFileName = 'foobarbaz.flac'
 
     @BeforeMethod
     void setUp() {
@@ -22,11 +23,14 @@ class SpeechCorpusPluginFunctionalTest {
                               |
                               |speechCorpus {
                               |  yamlFile = '$yamlFileName'
+                              |  flacFile = '$flacFileName'
                               |}
                               |""".stripMargin()
         gradle = GradleRunner.create().withPluginClasspath().withProjectDir(projectDir)
-        new File(projectDir, yamlFileName).withOutputStream { stream ->
-            stream << getClass().getResourceAsStream(yamlFileName)
+        [yamlFileName, flacFileName].each { resource ->
+            new File(projectDir, resource).withOutputStream { stream ->
+                stream << getClass().getResourceAsStream(resource)
+            }
         }
     }
 
@@ -71,5 +75,13 @@ class SpeechCorpusPluginFunctionalTest {
         def actual = new File("$projectDir/build/${projectDir.name}.TextGrid").text
         def expected = getClass().getResourceAsStream('foobarbaz.TextGrid').text
         assert actual == expected: projectDir
+    }
+
+    @Test
+    void testExtractWav() {
+        def result = gradle.withArguments(':extractWav').build()
+        assert result.task(':extractWav').outcome == SUCCESS
+        result = gradle.withArguments(':extractWav').build()
+        assert result.task(':extractWav').outcome == UP_TO_DATE
     }
 }
