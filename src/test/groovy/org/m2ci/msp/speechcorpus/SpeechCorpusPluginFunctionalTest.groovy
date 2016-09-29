@@ -42,9 +42,11 @@ class SpeechCorpusPluginFunctionalTest {
         assert result.task(':extractLab').outcome == SUCCESS
         result = gradle.withArguments(':extractLab').build()
         assert result.task(':extractLab').outcome == UP_TO_DATE
-        def actual = new File("$projectDir/build/lab/foo.lab").text
-        def expected = getClass().getResourceAsStream('foo.lab').text
-        assert LabFile.parse(actual) == LabFile.parse(expected)
+        ['foo.lab', 'bar.lab', 'baz.lab'].each { labFile ->
+            def actual = new File("$projectDir/build/lab/$labFile").text
+            def expected = getClass().getResourceAsStream(labFile).text
+            assert LabFile.parse(actual) == LabFile.parse(expected)
+        }
     }
 
     @Test
